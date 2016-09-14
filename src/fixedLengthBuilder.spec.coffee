@@ -8,16 +8,16 @@ describe "FixedLengthBuilder", ->
       { name: "dogs[0].description", length: 8 }
       { name: "balance", length: 10, decimals: 2 },
       { repeat: "-", length: 2 }
-      { name: "energy", length: 7, decimals: 2, withDot: false }
+      { name: "energy", length: 7, decimals: 4, withDot: false }
     ], "\n"
 
     people = [
       { name: "Rodrigo", dogs: [{ description: "Willy", happyness: 10.5 }], balance: 123.246, energy: 101.3 }
-      { name: "Charly", dogs: [{ description: "Octocat", happyness: 99 }], balance: 22323.1, energy: 106 }
+      { name: "Charly", dogs: [{ description: "Octocat", happyness: 99 }], balance: 22323.1, energy: 300 }
     ]
 
     builder.build(people).should
-      .eql "RodWilly   0000123.25--0010130\nChaOctocat 0022323.10--0010600"
+      .eql "RodWilly   0000123.25--1013000\nChaOctocat 0022323.10--3000000"
 
   it "uses \r\n as default delimiter", ->
     builder = new FixedLengthBuilder [

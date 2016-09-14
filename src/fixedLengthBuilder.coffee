@@ -30,14 +30,11 @@ class FixedLengthBuilder
       return _.padStart " ", column.length
 
     if column.decimals? and _.isNumber(value)
-      formattedNumber = _.padStart(
-        value.toFixed(column.decimals),
-        column.length,
-        "0"
-      )
+      fillWithZeros = (val) -> _.padStart(val, column.length, "0")
+      formattedNumber = fillWithZeros value.toFixed(column.decimals)
 
       if column.withDot is false
-        "0" + formattedNumber.replace ".", ""
+        fillWithZeros formattedNumber.replace(".", "")
       else formattedNumber
     else
       _.padEnd value, column.length
