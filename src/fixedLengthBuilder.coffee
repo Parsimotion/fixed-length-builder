@@ -14,6 +14,9 @@ class FixedLengthBuilder
 
   _buildOne: (obj) =>
     mapColumn = (column) =>
+      if column.repeat?
+        return _.repeat column.repeat, column.length
+        
       value = try eval "obj.#{column.name}"
 
       value = @
