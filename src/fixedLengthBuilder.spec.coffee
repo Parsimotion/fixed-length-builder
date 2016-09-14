@@ -6,16 +6,17 @@ describe "FixedLengthBuilder", ->
     builder = new FixedLengthBuilder [
       { name: "name", length: 3 }
       { name: "dogs[0].description", length: 8 }
-      { name: "balance", length: 10, decimals: 2 }
+      { name: "balance", length: 10, decimals: 2 },
+      { name: "energy", length: 7, decimals: 2, withDot: false }
     ], "\n"
 
     people = [
-      { name: "Rodrigo", dogs: [{ description: "Willy", happyness: 10.5 }], balance: 123.246 }
-      { name: "Charly", dogs: [{ description: "Octocat", happyness: 99 }], balance: 22323.1 }
+      { name: "Rodrigo", dogs: [{ description: "Willy", happyness: 10.5 }], balance: 123.246, energy: 101.3 }
+      { name: "Charly", dogs: [{ description: "Octocat", happyness: 99 }], balance: 22323.1, energy: 106 }
     ]
 
     builder.build(people).should
-      .eql "RodWilly   0000123.25\nChaOctocat 0022323.10"
+      .eql "RodWilly   0000123.250010130\nChaOctocat 0022323.100010600"
 
   it "uses \r\n as default delimiter", ->
     builder = new FixedLengthBuilder [
