@@ -1,6 +1,6 @@
 {
   "name": "fixed-length-builder",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Build a fixed length string from an specific format",
   "main": "index.js",
   "scripts": {
